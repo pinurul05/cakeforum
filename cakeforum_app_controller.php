@@ -19,7 +19,7 @@ class CakeforumAppController extends AppController {
 	
 	public $components = array('Auth', /*'DebugKit.Toolbar'*/);
 	
-	public $helpers = array('Html', 'Form', 'Cakeforum.User');
+	public $helpers = array('Html', 'Form', 'Cakeforum.UserForum');
 	
 	public $ext = '.php'; 
 	
