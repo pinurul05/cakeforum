@@ -12,8 +12,8 @@
 </div>
 <div class="nav">
 <?php
-	if($user->isLogged()) {
-		echo "<span>Hello " . $user->username() . "</span>";
+	if($userForum->isLogged()) {
+		echo "<span>Hello " . $userForum->username() . "</span>";
 		echo $html->link('Account', array('controller' => 'users', 'action' => 'account'));
 		echo "  ";
 		echo $html->link('Logout', array('controller' => 'users', 'action' => 'logout'));

@@ -15,7 +15,7 @@
       <td class="leftalign"><?php echo $html->link($post['User']['username'], 
 					array('controller' => 'users', 'action' => 'profile', $post['User']['username'])); ?></td>
       <td class="leftalign">
-      <?php if($post['User']['id'] == $user->id()): ?>
+      <?php if($post['User']['id'] == $userForum->id()): ?>
 	  	<div class="forum-topic-cp">
         	<?php echo $html->link('Edit', 
 						array('controller' => 'forum', 'action' => 'editpost', $post['ForumPost']['id'], $topicId, $forumId)); ?> |
