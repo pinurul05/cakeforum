@@ -33,7 +33,7 @@ class ForumTopic extends CakeforumAppModel {
 
 	public $belongsTo = array(
 		'User' => array(
-			'className' => 'Cakeforum.User',
+			'className' => 'User',
 			'foreignKey' => 'user_id',
 			'fields' => 'id, username'
 		)

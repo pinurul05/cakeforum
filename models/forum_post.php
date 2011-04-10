@@ -33,7 +33,7 @@ class ForumPost extends CakeforumAppModel {
 		),
 				
 		'User' => array(
-			'className' => 'Cakeforum.User',
+			'className' => 'User',
 			'foreignKey' => 'user_id',
 			'fields' => 'id, username'
 		),
