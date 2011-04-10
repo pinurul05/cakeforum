@@ -32,7 +32,8 @@ class ForumController extends CakeforumAppController {
 	public function beforeFilter() {	
 		
 		parent::beforeFilter();
-		$this->Auth->allowedActions = array('index', 'view', 'topic');
+		$this->Auth->allowedActions = array('index', 'view', 'topic',
+			'newtopic', 'reply', 'unanswered');
 		
 	}
 	
@@ -95,7 +96,7 @@ class ForumController extends CakeforumAppController {
 	 */
 		
 	public function topic($topic_id = null, $forum_id = null) {
-		
+
 		// get forum name
 		$forumName = $this->ForumCategory->getName($forum_id);
 		
@@ -139,7 +140,11 @@ class ForumController extends CakeforumAppController {
 	 */
  	
 	public function newtopic($forum_id = null) {
-		
+
+		if (!$this->Session->check('Auth.User')) {
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
+
 		// get forum name
 		$forumName = $this->ForumCategory->getName($forum_id);	
 		
@@ -221,6 +226,10 @@ class ForumController extends CakeforumAppController {
 		
 	public function reply($topic_id = null, $forum_id = null) {
 		
+		if (!$this->Session->check('Auth.User')) {
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
+
 		$topicExist = $this->ForumTopic->hasAny(array('id' => $topic_id));
 		
 		if (!$topicExist) {

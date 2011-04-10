@@ -30,7 +30,7 @@ class UsersController extends CakeforumAppController {
 		parent::beforeFilter();
 		
 		$this->Auth->allowedActions = array(
-			'register', 'registered', 'login', 'logout', 'lostpassword', 'confirm', 'reset', 'public_profile'
+			'register', 'registered', 'login', 'logout', 'lostpassword', 'confirm', 'reset', 'public_profile', 'profile'
 		);
 
 		// copy of form_password to password for auto hashing in Auth Component
@@ -44,7 +44,9 @@ class UsersController extends CakeforumAppController {
 	 */
 	
 	public function profile($username) {
-		
+		if (!$this->Session->check('Auth.User')) {
+			$this->redirect(array('controller' => 'users', 'action' => 'login'));
+		}
 		$this->pageTitle = $username;
 		
 		$this->User->unbindModel(array('belongsTo' => array('Group')));
