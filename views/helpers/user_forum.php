@@ -15,7 +15,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 
-class UserHelper extends Helper {
+class UserForumHelper extends Helper {
 	
 	public $helpers = array('Session');
 	
