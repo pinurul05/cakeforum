@@ -50,6 +50,7 @@ class ForumController extends CakeforumAppController {
 				'order' => 'order ASC',
 				'recursive' => -1,
 				'conditions' => array(
+					'active' => true,
 					'parent_id' => null
 				),
 			)
@@ -86,7 +87,6 @@ class ForumController extends CakeforumAppController {
 		if (empty($topics)){
 			$topics = null;
 		}
-				
 		$this->set('topics', $topics);
 		$this->set('forumId', $id);
 		$this->set('forumName', $forumName);
