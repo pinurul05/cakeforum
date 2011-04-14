@@ -24,7 +24,6 @@ class ForumPost extends CakeforumAppModel {
     			'rule' => 'notempty'
     		), 	
 	);	
-
 	public $belongsTo = array(
 			
 		'ForumTopic' => array(
@@ -35,7 +34,7 @@ class ForumPost extends CakeforumAppModel {
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
-			'fields' => 'id, username'
+			//'fields' => 'id, username'
 		),
 		
 		'ForumCategory' => array(
@@ -49,7 +48,7 @@ class ForumPost extends CakeforumAppModel {
 	 * Callbacks
 	 */
 	
-	public function beforeSave() {	
+	public function beforeSave() {
 		if(!empty($this->data['ForumPost']['subject'])) {
 			$this->data['ForumPost']['subject'] = strip_tags($this->data['ForumPost']['subject']);
 		}	

@@ -17,6 +17,8 @@
 
 class ForumCategory extends CakeforumAppModel {
 
+	var $actsAs = array('Tree');
+
 	public $hasMany = array(
 	
 		'ForumPost' => array(

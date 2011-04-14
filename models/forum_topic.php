@@ -35,7 +35,7 @@ class ForumTopic extends CakeforumAppModel {
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
-			'fields' => 'id, username'
+			//'fields' => 'id, username'
 		)
 	);
 
@@ -100,8 +100,8 @@ class ForumTopic extends CakeforumAppModel {
 	public function search($q = null) {
 		
 		$conditions = "MATCH (subject) AGAINST ('$q')";						
-		$fields = "ForumTopic.id, ForumTopic.forum_category_id, ForumTopic.subject, ForumTopic.created, ForumTopic.views, ForumTopic.replies, User.id, User.username";
-		
+		$userField = Configure::read('searchUser');
+		$fields = "ForumTopic.id, ForumTopic.forum_category_id, ForumTopic.subject, ForumTopic.created, ForumTopic.views, ForumTopic.replies, $userField";
 		$topics = $this->find('all', array(
 				'conditions' => $conditions,
 				'fields' => $fields,
