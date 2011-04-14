@@ -1,5 +1,5 @@
 <?php
-
+// vim: set sw=4 ts=4 sts=4 si noet:
 /**
  * CakeForum
  *
@@ -19,7 +19,7 @@ class CakeforumAppController extends AppController {
 	
 	public $components = array('Auth', /*'DebugKit.Toolbar'*/);
 	
-	public $helpers = array('Html', 'Form', 'Cakeforum.UserForum');
+	public $helpers = array('Html', 'Form', 'Cakeforum.ForumUtil');
 	
 	public $ext = '.php'; 
 	
@@ -27,7 +27,8 @@ class CakeforumAppController extends AppController {
 
 	
 	public function beforeFilter() {
-		$this->auth();	
+		$this->auth();
+		$this->_setupConfig();
 	}
 	
 	
@@ -43,8 +44,16 @@ class CakeforumAppController extends AppController {
 		}
 		
 		$this->userID = $this->Auth->user('id');
+		$name = Configure::read('username');
+		$this->userName = $this->Auth->user($name);
 	}
 
+	private function _setupConfig() {
+		$this->fieldUser = Configure::read('fieldUser');
+		$this->uname = Configure::read('username');
+		$arr = explode(',', $this->fieldUser);
+		$this->fUsername = $arr[1];
+	}
 }
 
 ?>
