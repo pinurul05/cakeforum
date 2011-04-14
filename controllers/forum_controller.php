@@ -1,4 +1,5 @@
 <?php
+# vim: set si ts=4 sts=4 sw=4 noet:
 
 /**
  * CakeForum
@@ -47,10 +48,13 @@ class ForumController extends CakeforumAppController {
 		
 		$forums = $this->ForumCategory->find('all', array(
 				'order' => 'order ASC',
-				'recursive' => -1
+				'recursive' => -1,
+				'conditions' => array(
+					'parent_id' => null
+				),
 			)
 		);
-		
+
 		$this->set('categories', $forums);		
 	}
 	
@@ -186,7 +190,7 @@ class ForumController extends CakeforumAppController {
 					'last_topic_subject' => strip_tags($this->data['ForumTopic']['subject']),
 					'last_topic_created' => date('Y-m-d H:m:s'),				
 					'last_topic_user_id' => $this->userID,
-					'last_topic_username' => $this->Auth->user('username'),				
+					'last_topic_username' => $this->userName,
 				);
 
 				$this->ForumCategory->updateLastTopic($forum_id, $lastTopic);
@@ -198,7 +202,7 @@ class ForumController extends CakeforumAppController {
 					'last_post_page' => 0,
 					'last_post_created' => date('Y-m-d H:i:s'),
 					'last_post_user_id' => $this->userID,
-					'last_post_username' => $this->Auth->user('username')
+					'last_post_username' => $this->userName
 				);					
 				
 				$this->ForumTopic->updateLastPost($topic_id, $lastPost);
@@ -262,7 +266,7 @@ class ForumController extends CakeforumAppController {
 					'last_post_page' => $numPage,
 					'last_post_created' => date('Y-m-d H:i:s'),
 					'last_post_user_id' => $this->userID,
-					'last_post_username' => $this->Auth->user('username')
+					'last_post_username' => $this->userName
 				);							
 				
 				$this->ForumTopic->updateLastPost($topic_id, $lastPost);
