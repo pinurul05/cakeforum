@@ -1,6 +1,8 @@
+<?php // vim: set ts=4 sts=4 sw=4 si noet: ?>
 <div class="forum-path"> 
 <?php echo $html->link('Forum index', array('controller' => 'forum', 'action' => 'index')); ?> » 
-<?php echo $html->link($forumName, array('controller' => 'forum', 'action' => 'view', $forumId)); ?> 
+<?php echo $html->link($forumName, array('controller' => 'forum', 'action' => 'view', $forumId)); ?>
+<?php $uname = Configure::read('username'); ?>
 </div>
 <div class="forum-topic-title"><?php echo $topic['ForumTopic']['subject'] ?></div>
 <div class="forum-index">
@@ -12,10 +14,10 @@
     <?php foreach ($posts as $post): ?>
     <tr>
     	<a name="<?php echo $post['ForumPost']['id']; ?>" id="<?php echo $post['ForumPost']['id']; ?>"></a>
-      <td class="leftalign"><?php echo $html->link($post['User']['username'], 
-					array('controller' => 'users', 'action' => 'profile', $post['User']['username'])); ?></td>
+      <td class="leftalign"><?php echo $html->link($post['User'][$uname],
+					array('controller' => 'users', 'action' => 'profile', $post['User'][$uname])); ?></td>
       <td class="leftalign">
-      <?php if($post['User']['id'] == $userForum->id()): ?>
+      <?php if($post['User']['id'] == $forumUtil->id()): ?>
 	  	<div class="forum-topic-cp">
         	<?php echo $html->link('Edit', 
 						array('controller' => 'forum', 'action' => 'editpost', $post['ForumPost']['id'], $topicId, $forumId)); ?> |
