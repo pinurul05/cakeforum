@@ -1,4 +1,5 @@
 <?php
+# vim: set si ts=4 sts=4 sw=4 noet:
 
 /**
  * CakeForum
@@ -30,7 +31,8 @@ class UsersController extends CakeforumAppController {
 		parent::beforeFilter();
 		
 		$this->Auth->allowedActions = array(
-			'register', 'registered', 'login', 'logout', 'lostpassword', 'confirm', 'reset', 'public_profile', 'profile'
+			'register', 'registered', 'login', 'logout', 'lostpassword', 'confirm',
+			'reset', 'public_profile', 'profile', 'account'
 		);
 
 		// copy of form_password to password for auto hashing in Auth Component
@@ -50,10 +52,9 @@ class UsersController extends CakeforumAppController {
 		$this->pageTitle = $username;
 		
 		$this->User->unbindModel(array('belongsTo' => array('Group')));
-		
 		$user = $this->User->find('first', array(
-				'conditions' =>array('User.username' => $username),
-				'fields' => array('User.id', 'User.username', 'User.email', 'User.created')
+				'conditions' =>array($this->fUsername => $username),
+				'fields' => array($this->fieldUser),
 		));		
 
 		$this->set('data', $user);		
@@ -101,18 +102,17 @@ class UsersController extends CakeforumAppController {
 	 */
 
 	public function login() {
-		
 		$this->pageTitle = 'Login';
-
 		if (! empty($this->userID) && $this->Session->valid()) {
 			$this->redirect('/');
 		}
 		$this->set('error', false);
 		if (! empty($this->data)) {
-			if ($this->Auth->login()) {
-				$this->redirect('/');			
+			if ($this->Auth->login($this->data)) {
+				$this->redirect('/cakeforum/forum');
 			} else {
 				$this->Session->setFlash("Wrong username or password.");
+				$this->redirect('/cakeforum/users/login');
 			}
 		}
 	}
@@ -123,7 +123,7 @@ class UsersController extends CakeforumAppController {
 
 	public function logout() {
 		$this->Auth->logout();
-		$this->redirect('/');
+		$this->redirect('/cakeforum/forum');
 	}
 	
 	/**
@@ -138,7 +138,7 @@ class UsersController extends CakeforumAppController {
 
 			$user = $this->User->find('first', array(
 					'conditions' => array('email' => $this->data['User']['email'], 'active' => '1'), 
-					'fields' => array('User.id', 'User.username', 'User.email'), 
+					'fields' => array($this->fieldUser),
 					'recursive' => -1
 				)
 			);
@@ -171,7 +171,7 @@ class UsersController extends CakeforumAppController {
 				$message = 'User not found or not active';
 			}
 			$this->Session->setFlash($message);
-			$this->redirect('/lostpassword');
+			$this->redirect('/cakeforum/forum/');
 		}
 	}
 	
@@ -179,7 +179,7 @@ class UsersController extends CakeforumAppController {
 	
 		$user = $this->User->find('first', array(
 				'conditions' => array('confirm' => $string), 
-				'fields' => array('User.id', 'User.username', 'User.email'), 
+				'fields' => array($this->fieldUser),
 				'recursive' => -1
 			)
 		);
@@ -223,17 +223,16 @@ class UsersController extends CakeforumAppController {
 		if (empty($this->data)) {		
 			$this->data = $this->User->find('first', array(
 					'conditions' => array('id' => $this->userID),
-					'fields' => array('id', 'username', 'email'),
+					'fields' => array($this->fieldUser),
 					'recursive' => -1
 				)
 			);	
 		} else {			
 			$this->data['User']['id'] = $this->userID;	
-
-			$fieldList = array('username', 'email', 'password', 'old_password', 'form_password', 'confirm_password');
+			$fieldList = array($this->uname, 'email', 'password', 'old_password', 'form_password', 'confirm_password');
 			if($this->User->save($this->data, true, $fieldList)) {
 				$this->Session->setFlash("Account data has been saved.");
-				$this->redirect('/account');
+				$this->redirect('/cakeforum/forum/');
 			}
 		}	
 	}
