@@ -136,13 +136,13 @@ class ForumTopic extends CakeforumAppModel {
 			);
 			$this->recursive = -1;
 			$post = $this->read('replies', $topic_id);
-	
+			$uname = Configure::read('username');
 			$data = array(
 				'last_post_id' => $t['ForumPost']['id'],
 				'last_post_page' => $forum->getLastPageNumber($topic_id,  $post),
 				'last_post_created' => $t['ForumPost']['created'],
 				'last_post_user_id' => $t['User']['id'],
-				'last_post_username' => $t['User']['username'],
+				'last_post_username' => $t['User'][$uname],
 			);		
 
 		}
