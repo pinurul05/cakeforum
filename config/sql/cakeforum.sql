@@ -14,6 +14,9 @@ CREATE TABLE `forum_categories` (
   `last_topic_created` datetime NOT NULL,
   `last_topic_user_id` mediumint(8) NOT NULL,
   `last_topic_username` varchar(64) collate utf8_unicode_ci NOT NULL,
+  `parent_id` mediumint(8) DEFAULT NULL,
+  `lft` mediumint(8) DEFAULT NULL,
+  `rght` mediumint(8) DEFAULT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -84,7 +87,7 @@ CREATE TABLE `sessions` (
 -- ----------------------------
 -- Table structure for users
 -- ----------------------------
-DROP TABLE IF EXISTS `users`;
+/*DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` smallint(8) NOT NULL auto_increment,
   `username` varchar(64) collate utf8_unicode_ci NOT NULL,
@@ -97,3 +100,4 @@ CREATE TABLE `users` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `uc` (`username`,`confirm`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+*/
