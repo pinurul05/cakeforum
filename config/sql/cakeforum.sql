@@ -3,20 +3,21 @@
 -- ----------------------------
 DROP TABLE IF EXISTS `forum_categories`;
 CREATE TABLE `forum_categories` (
-  `id` mediumint(5) NOT NULL auto_increment,
+  `id` varchar(36) NOT NULL,
   `name` varchar(100) collate utf8_unicode_ci NOT NULL,
   `description` varchar(255) collate utf8_unicode_ci NOT NULL,
-  `topics` mediumint(8) NOT NULL,
-  `posts` mediumint(8) NOT NULL,
+  `topics` int(11) NOT NULL,
+  `posts` int(11) NOT NULL,
   `order` tinyint(2) NOT NULL,
-  `last_topic_id` mediumint(8) NOT NULL,
+  `active` tinyint(1) collate utf8_unicode_ci DEFAULT 1,
+  `last_topic_id` varchar(36) NOT NULL,
   `last_topic_subject` varchar(150) collate utf8_unicode_ci NOT NULL,
   `last_topic_created` datetime NOT NULL,
-  `last_topic_user_id` mediumint(8) NOT NULL,
+  `last_topic_user_id` varchar(36) NOT NULL,
   `last_topic_username` varchar(64) collate utf8_unicode_ci NOT NULL,
-  `parent_id` mediumint(8) DEFAULT NULL,
-  `lft` mediumint(8) DEFAULT NULL,
-  `rght` mediumint(8) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `lft` int(11) DEFAULT NULL,
+  `rght` int(11) DEFAULT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -25,10 +26,10 @@ CREATE TABLE `forum_categories` (
 -- ----------------------------
 DROP TABLE IF EXISTS `forum_posts`;
 CREATE TABLE `forum_posts` (
-  `id` mediumint(8) NOT NULL auto_increment,
-  `forum_category_id` mediumint(8) NOT NULL,
-  `forum_topic_id` mediumint(8) NOT NULL,
-  `user_id` mediumint(8) NOT NULL,
+  `id` varchar(36) NOT NULL,
+  `forum_category_id` varchar(36) NOT NULL,
+  `forum_topic_id` varchar(36) NOT NULL,
+  `user_id` varchar(36) NOT NULL,
   `text` mediumtext collate utf8_unicode_ci NOT NULL,
   `topic` tinyint(1) NOT NULL,
   `created` datetime NOT NULL,
@@ -44,17 +45,17 @@ CREATE TABLE `forum_posts` (
 -- ----------------------------
 DROP TABLE IF EXISTS `forum_topics`;
 CREATE TABLE `forum_topics` (
-  `id` mediumint(8) NOT NULL auto_increment,
-  `user_id` mediumint(8) NOT NULL,
-  `forum_category_id` mediumint(8) NOT NULL,
+  `id` varchar(36) NOT NULL,
+  `user_id` varchar(36) NOT NULL,
+  `forum_category_id` varchar(36) NOT NULL,
   `subject` varchar(150) collate utf8_unicode_ci NOT NULL,
-  `views` mediumint(8) NOT NULL,
-  `replies` mediumint(8) NOT NULL,
+  `views` int(11) NOT NULL,
+  `replies` int(11) NOT NULL,
   `created` datetime NOT NULL,
-  `last_post_id` mediumint(8) NOT NULL,
-  `last_post_page` mediumint(3) NOT NULL,
+  `last_post_id` varchar(36) NOT NULL,
+  `last_post_page` int(11) NOT NULL,
   `last_post_created` datetime NOT NULL,
-  `last_post_user_id` mediumint(8) NOT NULL,
+  `last_post_user_id` varchar(36) NOT NULL,
   `last_post_username` varchar(64) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `cat_id` (`forum_category_id`),
@@ -67,7 +68,7 @@ CREATE TABLE `forum_topics` (
 -- ----------------------------
 DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
-  `id` int(7) unsigned NOT NULL auto_increment,
+  `id` varchar(36)  NOT NULL,
   `name` varchar(50) collate utf8_unicode_ci NOT NULL,
   `description` tinytext collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
@@ -78,7 +79,7 @@ CREATE TABLE `groups` (
 -- ----------------------------
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
-  `id` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `id` varchar(36) collate utf8_unicode_ci NOT NULL,
   `data` text collate utf8_unicode_ci NOT NULL,
   `expires` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
