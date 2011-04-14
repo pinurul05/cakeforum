@@ -12,8 +12,9 @@
 </div>
 <div class="nav">
 <?php
-	if($userForum->isLogged()) {
-		echo "<span>Hello " . $userForum->username() . "</span>";
+echo $this->Session->flash();
+	if($forumUtil->isLogged()) {
+		echo "<span>Hello " . $forumUtil->username() . "</span>";
 		echo $html->link('Account', array('controller' => 'users', 'action' => 'account'));
 		echo "  ";
 		echo $html->link('Logout', array('controller' => 'users', 'action' => 'logout'));

@@ -1,10 +1,11 @@
  <div class="forum-path"><?php echo $html->link('Forum index', array('controller' => 'forum', 'action' => 'index')); ?> » Register</div>
 <div class="forum-login">
+<?php $uname = Configure::read('username'); ?>
 	<?php echo $form->create('User', array('action' => 'register')); ?>
     <div class="field">
       <label>Username</label>
-	  <?php echo $form->text('User.username'); ?>
-	  <?php echo $form->error('User.username', array(
+	  <?php echo $form->text('User.'.$uname); ?>
+	  <?php echo $form->error('User.'.$uname, array(
 							 	'required' => 'Username is required!',
 								'alphanumeric' => 'Username is invalid.',
 								'checkunique'  => 'Username is already in use.'

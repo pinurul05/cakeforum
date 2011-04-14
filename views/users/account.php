@@ -7,9 +7,10 @@
 	?>
     <div class="field">
       <label>Username</label>
-	  <?php echo $form->text('User.username'); ?>
+	 <?php $uname = Configure::read('username'); ?>
+	  <?php echo $form->text('User.'.$uname); ?>
       <div class="error-message">
-	  <?php echo $form->error('User.username', array(
+	  <?php echo $form->error('User.'.$uname, array(
 							 	'required' => 'Username is required!',
 								'alphanumeric' => 'Username is invalid.',
 								'checkunique'  => 'Username is already in use.'
