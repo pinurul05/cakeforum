@@ -1,4 +1,5 @@
 <?php
+// vim: set ts=4 sts=4 sw=4 si noet:
 
 /**
  * CakeForum
@@ -15,7 +16,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 
-class UserForumHelper extends Helper {
+class ForumUtilHelper extends Helper {
 	
 	public $helpers = array('Session');
 	
@@ -40,7 +41,7 @@ class UserForumHelper extends Helper {
 	 */
 	
 	public function username() {
-		return $this->read('username');		
+		return $this->read(Configure::read('username'));
 	}
 	
 	/**
