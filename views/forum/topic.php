@@ -27,7 +27,7 @@
         </div>
 	  	<?php echo $post['ForumPost']['text']; ?>
         <div class="forum-topic-date">
-        	<span>ID: <?php echo $post['ForumPost']['id']; ?></span>
+			<!-- <span>ID: <?php #echo $post['ForumPost']['id']; ?></span> -->
         	Date: <?php echo $time->format('d.m.Y H:i',$post['ForumPost']['created']); ?>
         </div>
       </td>
