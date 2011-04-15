@@ -10,5 +10,9 @@ Configure::write('namefieldUserId', 'id');
 #configure user slug, value true or false
 Configure::write('userSlug', true);
 
+#user field login
+Configure::write('userLogin', 'User.username');
+
+
 ?>
 
