@@ -75,7 +75,9 @@ class UsersController extends CakeforumAppController {
 				$this->data['User']['active'] = 1;
 				
 				// save user data
-				
+				if (Configure::read('userSlug')) {
+					$this->data['User']['slug'] = $this->data['User'][$this->uname];
+				}
 				if ($this->User->save($this->data)) {				
 					$this->redirect(array('action' => 'registered'));
 				} else {
@@ -228,8 +230,14 @@ class UsersController extends CakeforumAppController {
 				)
 			);	
 		} else {			
-			$this->data['User']['id'] = $this->userID;	
-			$fieldList = array($this->uname, 'email', 'password', 'old_password', 'form_password', 'confirm_password');
+			$this->data['User']['id'] = $this->userID;
+			$addslug = "";
+			if (Configure::read('userSlug')) {
+				$this->data['User']['slug'] = $this->data['User'][$this->uname];
+				$addslug = 'slug';
+			}
+
+			$fieldList = array($this->uname, $addslug, 'email', 'password', 'old_password', 'form_password', 'confirm_password');
 			if($this->User->save($this->data, true, $fieldList)) {
 				$this->Session->setFlash("Account data has been saved.");
 				$this->redirect('/cakeforum/forum/');
