@@ -7,5 +7,8 @@ Configure::write('fieldUser', 'User.id, User.username, User.email, User.created'
 Configure::write('searchUser', 'User.id, User.username');
 Configure::write('namefieldUserId', 'id');
 
+#configure user slug, value true or false
+Configure::write('userSlug', true);
+
 ?>
 
