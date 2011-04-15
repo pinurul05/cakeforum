@@ -18,7 +18,7 @@
 
 class ForumUtilHelper extends Helper {
 	
-	public $helpers = array('Session');
+	public $helpers = array('Session', 'Html');
 	
 	/**
 	 * Get user data
@@ -66,6 +66,28 @@ class ForumUtilHelper extends Helper {
 	
 	public function id() {
 		return $this->read('id');
+	}
+
+	public function admin_menu($title, $options = array()) {
+		$controller = empty($options['controller']) ?
+		Inflector::pluralize(Inflector::slug(strtolower($title)), '_') :
+		$options['controller'];
+
+		$options = set::merge(array(
+			'controller' => $controller,
+			'action' => 'index',
+			'admin' => true,
+			'plugin' => 'cakeforum',)
+		, $options);
+		return $this->Html->link($title, $options);
+	}
+
+	public function display_status($type) {
+		if ($type == 1) {
+			return 'Y';
+		} else {
+			return 'N';
+		}
 	}
 
 }
