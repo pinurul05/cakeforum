@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>CakeForum » <?php echo $title_for_layout?></title>
+<title>Forum » <?php echo $title_for_layout?></title>
 <?php echo $html->css('/cakeforum/css/forum');?>
 </head>
 <body>
@@ -26,7 +26,7 @@ echo $this->Session->flash();
 ?>
 </div>
 <?php echo $content_for_layout;?>
-<div class="footer">Developed by <a href="http://www.inservio.ba">Inservio</a></div>
+<!--<div class="footer">Developed by <a href="http://www.inservio.ba">Inservio</a></div>-->
 </div>
 </body>
 </html>
