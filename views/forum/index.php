@@ -49,9 +49,12 @@
       	<?php echo $html->link($cat['ForumCategory']['last_topic_subject'],  
 					array('controller' => 'forum', 'action' => 'topic', $cat['ForumCategory']['last_topic_id'], $cat['ForumCategory']['id'])); ?>
                     <br />
-	  	<?php echo $time->format('d.m.Y H:i', $cat['ForumCategory']['last_topic_created']); ?> | 
-        <?php echo $html->link($cat['ForumCategory']['last_topic_username'], 
-					array('controller' => 'users', 'action' => 'profile', $cat['ForumCategory']['last_topic_username'])); ?>
+	  	<?php
+			if (isset( $cat['ForumCategory']['last_topic_created'])) {
+				echo $time->format('d.m.Y H:i', $cat['ForumCategory']['last_topic_created']); ?> |
+		<?php echo $html->link($cat['ForumCategory']['last_topic_username'],
+					array('controller' => 'users', 'action' => 'profile', $cat['ForumCategory']['last_topic_username']));
+		} ?>
       </td>
     </tr>
     <?php endforeach; ?>
