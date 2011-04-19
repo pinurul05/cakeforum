@@ -12,8 +12,8 @@
 			'type' => 'select',
 			'options' => $parentCategory
 		));
-		echo $this->Form->input('lft', array('label' => 'Left'));
-		echo $this->Form->input('rght', array('label' => 'Right'));
+		#echo $this->Form->input('lft', array('label' => 'Left'));
+		#echo $this->Form->input('rght', array('label' => 'Right'));
 		echo $this->Form->input('active');
 	?>
 	</fieldset>

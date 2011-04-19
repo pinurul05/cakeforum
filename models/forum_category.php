@@ -17,7 +17,18 @@
 
 class ForumCategory extends CakeforumAppModel {
 
+	var $name = 'ForumCategory';
 	var $actsAs = array('Tree');
+
+	public $belongsTo = array(
+		'ParentForumCategory' => array(
+		'className' => 'ForumCategory',
+		'foreignKey' => 'parent_id',
+		'conditions' => '',
+		'fields' => '',
+		'order' => ''
+		)
+    );
 
 	public $hasMany = array(
 	
@@ -31,7 +42,12 @@ class ForumCategory extends CakeforumAppModel {
 			'className' => 'Cakeforum.ForumTopic',
 			'foreignKey' => 'forum_category_id',
 			'dependent' => true,
-		)
+		),
+		'ChildForumCategory' => array(
+			'className' => 'Cakeforum.ForumCategory',
+			'foreignKey' => 'parent_id',
+			'dependent' => false,
+		),
 	);
 	
 	public function getName($id = null) {
