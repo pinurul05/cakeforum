@@ -13,6 +13,8 @@ Configure::write('userSlug', true);
 #user field login
 Configure::write('userLogin', 'User.username');
 
+#label user login
+Configure::write('labelUserLogin', 'Username');
 
 ?>
 

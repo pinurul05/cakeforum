@@ -6,7 +6,7 @@
 	<?php echo $this->Session->flash('auth'); ?>
 	<?php echo $form->create('User', array('action' => 'login')); ?>
     <div class="field">
-      <label>Username</label>
+      <label><?php echo Configure::read('labelUserLogin');?></label>
       <?php echo $form->text($uname); ?>
     </div>
     <div class="field">
