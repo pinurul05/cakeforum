@@ -6,7 +6,12 @@
 		echo $this->Form->input('name');
 		echo $this->Form->input('description');
 		echo $this->Form->input('order', array('type' => 'text', 'value' => 0));
-		echo $this->Form->input('parent_id', array('type' => 'text'));
+		echo $this->Form->input('parent_id', array(
+			'value' => '',
+			'empty' => true,
+			'type' => 'select',
+			'options' => $parentCategory
+		));
 		echo $this->Form->input('lft', array('label' => 'Left'));
 		echo $this->Form->input('rght', array('label' => 'Right'));
 		echo $this->Form->input('active');

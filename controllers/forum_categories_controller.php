@@ -89,6 +89,8 @@ class ForumCategoriesController extends AppController {
 				$this->Session->setFlash(__('The forum category could not be saved. Please, try again.', true));
 			}
 		}
+		$parentCategory = $this->ForumCategory->find('list');
+		$this->set(compact('parentCategory'));
 	}
 
 	function admin_edit($id = null) {
